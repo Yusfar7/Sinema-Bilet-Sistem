@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace Sinema_Bilet_Sistem
         int biletFiyat = 0;
         int a = 0;
         int b = 0;
+        
         public void textBox1_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
@@ -458,17 +460,13 @@ namespace Sinema_Bilet_Sistem
 
         private void button28_Click(object sender, EventArgs e)
         {
-            PrintDialog pd = new PrintDialog();
-            DialogResult answer = pd.ShowDialog();
-            if (answer == DialogResult.OK)
-            {
+            if (printDialog1.ShowDialog() == DialogResult.OK)
                 printDocument1.Print();
-            }
         }
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
         {
-            e.Graphics.DrawString(richTextBox1.Text, richTextBox1.Font,
-           Brushes.DarkOrange, new Point(100, 100));
+            e.Graphics.DrawString(richTextBox1.Text,new Font("Times New Roman",14,FontStyle.Bold),Brushes.Black,new PointF(100,100));
         }
     }
 }
